@@ -1,0 +1,5 @@
+allowBuilds:
+  core-js: false
+  core-js-pure: false
+minimumReleaseAgeExclude:
+  - axios@1.18.0
