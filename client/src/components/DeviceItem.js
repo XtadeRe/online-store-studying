@@ -19,7 +19,11 @@ const DeviceItem = ({ device }) => {
         className="align-items-center"
       >
         <div>
-          <Image width={200} height={200} src={device.img} />
+          <Image
+            width={200}
+            height={200}
+            src={process.env.REACT_APP_API_URL + device.img}
+          />
           <p className="mt-4 mb-0">{device.name}</p>
           <p className="text-black-50 mt-2 mb-0">Samsung</p>
 

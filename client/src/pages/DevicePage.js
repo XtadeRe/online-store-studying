@@ -1,22 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Col, Image, Row, Card, Button } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import { fetchOneDevice } from "../http/deviceApi";
 
 const DevicePage = () => {
-  const device = {
-    id: 1,
-    name: "Iphone 12",
-    img: "https://miraphone.ru/upload/resize_cache/iblock/e8f/350_350_2/dpx88m7qpu0afenvus2pigyohw8p9wdu.jpg",
-    rating: 0,
-    price: 5000,
-  };
-  const description = [
-    { id: 1, title: "Оперативная память", description: "5 гб" },
-    { id: 2, title: "Процессор", description: "A14 Bionic" },
-    { id: 3, title: "Экран", description: "6.1 дюймов" },
-    { id: 4, title: "Камера", description: "12 МП" },
-    { id: 5, title: "Аккумулятор", description: "2815 мАч" },
-  ];
+  const [device, setDevice] = useState({ info: [] });
+  const { id } = useParams();
+  useEffect(() => {
+    fetchOneDevice(id).then((data) => setDevice(data));
+  }, []);
 
   return (
     <Container className="mt-4">
@@ -25,7 +18,7 @@ const DevicePage = () => {
           <Image
             width={300}
             height={300}
-            src={device.img}
+            src={process.env.REACT_APP_API_URL + device.img}
             className="mb-3"
             style={{ objectFit: "cover" }}
           />
@@ -51,7 +44,7 @@ const DevicePage = () => {
       <Row className="mt-5">
         <Col>
           <h3 className="mb-3">Характеристики:</h3>
-          {description.map((info, index) => (
+          {device.info.map((info, index) => (
             <Row
               key={info.id}
               style={{

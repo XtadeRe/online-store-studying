@@ -2,52 +2,14 @@ import { makeAutoObservable } from "mobx";
 
 export default class DeviceStore {
   constructor() {
-    this._types = [
-      { id: 1, name: "Холодильники" },
-      { id: 2, name: "Смартфоны" },
-      { id: 3, name: "Ноутбуки" },
-      { id: 4, name: "Телевизоры" },
-    ];
-    this._brands = [
-      { id: 1, name: "Samsung" },
-      { id: 2, name: "Apple" },
-      { id: 3, name: "Lenovo" },
-      { id: 4, name: "Xiaomi" },
-    ];
-    this._devices = [
-      {
-        id: 1,
-        name: "Iphone 12",
-        img: "https://miraphone.ru/upload/resize_cache/iblock/e8f/350_350_2/dpx88m7qpu0afenvus2pigyohw8p9wdu.jpg",
-        rating: 0,
-      },
-      {
-        id: 2,
-        name: "Galaxy s6",
-        img: "https://miraphone.ru/upload/resize_cache/iblock/e8f/350_350_2/dpx88m7qpu0afenvus2pigyohw8p9wdu.jpg",
-        rating: 0,
-      },
-      {
-        id: 3,
-        name: "Iphone 15",
-        img: "https://miraphone.ru/upload/resize_cache/iblock/e8f/350_350_2/dpx88m7qpu0afenvus2pigyohw8p9wdu.jpg",
-        rating: 0,
-      },
-      {
-        id: 4,
-        name: "Galaxy s11",
-        img: "https://miraphone.ru/upload/resize_cache/iblock/e8f/350_350_2/dpx88m7qpu0afenvus2pigyohw8p9wdu.jpg",
-        rating: 0,
-      },
-      {
-        id: 5,
-        name: "Galaxy s11",
-        img: "https://miraphone.ru/upload/resize_cache/iblock/e8f/350_350_2/dpx88m7qpu0afenvus2pigyohw8p9wdu.jpg",
-        rating: 0,
-      },
-    ];
+    this._types = [];
+    this._brands = [];
+    this._devices = [];
     this._selectedType = {};
     this._selectedBrand = {};
+    this._page = 1;
+    this._totalCount = 0;
+    this._limit = 3;
 
     makeAutoObservable(this);
   }
@@ -72,6 +34,14 @@ export default class DeviceStore {
     this._selectedBrand = brand;
   }
 
+  setPage(page) {
+    this._page = page;
+  }
+
+  setTotalCount(count) {
+    this._totalCount = count;
+  }
+
   get types() {
     return this._types;
   }
@@ -89,5 +59,13 @@ export default class DeviceStore {
 
   get selectedBrand() {
     return this._selectedBrand;
+  }
+
+  get page() {
+    return this._page;
+  }
+
+  get limit() {
+    return this._limit;
   }
 }
